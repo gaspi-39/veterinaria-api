@@ -1,0 +1,4 @@
+{
+  "users": [{ "dni": 12324546, "name": "Gaspar", "lastName": "Lopez" }],
+  "pets": [{ "id": 1, "name": "Firulais", "type": "Dog", "ownerDni": 12324546 }]
+}
