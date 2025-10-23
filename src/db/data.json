@@ -1,4 +1,27 @@
 {
-  "users": [{ "dni": 12324546, "name": "Gaspar", "lastName": "Lopez" }],
-  "pets": [{ "id": 1, "name": "Firulais", "type": "Dog", "ownerDni": 12324546 }]
+  "users": [
+    {
+      "dni": 12324546,
+      "name": "Gaspar",
+      "lastName": "Lopez"
+    },
+    {
+      "dni": 2134234,
+      "name": "pepe",
+      "lastName": "Perez"
+    },
+    {
+      "dni": 232423,
+      "name": "pepe",
+      "lastName": "Perez"
+    }
+  ],
+  "pets": [
+    {
+      "id": 1,
+      "name": "Firulais",
+      "type": "Dog",
+      "ownerDni": 12324546
+    }
+  ]
 }

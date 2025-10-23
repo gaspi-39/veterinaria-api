@@ -2,13 +2,13 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from 'src/models/users.model';
 import * as fs from 'fs';
 import * as path from 'path';
-import { verifyDNI } from 'src/helpers/helpers';
-
+import { Pet } from 'src/models/pets.models';
+import { verifyId } from 'src/helpers/helpers';
 const ruta: string =
   'C:/Users/lazar/OneDrive/Documentos/TECDA/1er año/EDI/veterinaria-api/src/db/data.json';
 
 @Injectable()
-export class UsersService {
+export class PetsService {
   private read(): any {
     try {
       const data: any = JSON.parse(fs.readFileSync(ruta, 'utf-8'));
@@ -24,51 +24,51 @@ export class UsersService {
       throw new NotFoundException(`Error: ${error}`);
     }
   }
-  getUsers(): any {
+  getPets(): any {
     const data = this.read();
-    return data.users;
+    return data.pets;
   }
-  createUser(user: User): any {
+  createPet(pet: Pet): any {
     try {
       const data = this.read();
-      const newUser: User = new User(user);
+      const newPet: Pet = new Pet(pet);
 
-      if (verifyDNI(data, newUser.dni)) {
-        throw new Error(`El dni ya está registrado`);
+      if (verifyId(data, newPet.id)) {
+        throw new Error(`Esta ID ya está registrada`);
       }
 
-      data.users.push(newUser);
+      data.pets.push(newPet);
       this.write(data);
-      return { data: data.users, msg: 'Usuario creado correctamente' };
+      return { data: data.pets, msg: 'Mascota creada correctamente' };
     } catch (err) {
       throw new NotFoundException(`Error: ${err}`);
     }
   }
-  putUser(user: User): any {
+  putPet(pet: Pet): any {
     try {
       const data = this.read();
-      const index = data.users.findIndex((u) => u.dni === user.dni);
-      let newUser: User = new User(user);
+      const index = data.pets.findIndex((u) => u.id === pet.id);
+      let newPet: Pet = new Pet(pet);
       if (index != -1) {
-        data.users.splice(index, 1, newUser);
+        data.pets.splice(index, 1, newPet);
         this.write(data);
-        return { data: data.users, msg: 'Usuario modificado correctamente' };
+        return { data: data.pets, msg: 'Mascota modificada correctamente' };
       }
-      throw new Error(`Usuario no encontrado`);
+      throw new Error(`Mascota no encontrada`);
     } catch (err) {
       throw new NotFoundException(`Error: ${err}`);
     }
   }
-  deleteUser(dni: number): any {
+  deletePet(id: number): any {
     try {
       const data = this.read();
-      const index = data.users.findIndex((u) => u.dni === dni);
+      const index = data.pets.findIndex((u) => u.id === id);
       if (index != -1) {
-        data.users.splice(index, 1);
+        data.pets.splice(index, 1);
         this.write(data);
-        return { data: data.users, msg: 'Usuario eliminado correctamente}' };
+        return { data: data.pets, msg: 'Mascota eliminada correctamente}' };
       }
-      throw new Error(`Usuario no encontrado`);
+      throw new Error(`Mascota no encontrada`);
     } catch (err) {
       throw new NotFoundException(`Error: ${err}`);
     }
