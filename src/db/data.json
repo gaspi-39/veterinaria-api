@@ -1,17 +1,12 @@
 {
   "users": [
     {
-      "dni": 12324546,
+      "dni": 47513088,
       "name": "Gaspar",
       "lastName": "Lopez"
     },
     {
-      "dni": 2134234,
-      "name": "pepe",
-      "lastName": "Perez"
-    },
-    {
-      "dni": 232423,
+      "dni": 55123123,
       "name": "pepe",
       "lastName": "Perez"
     }
@@ -19,9 +14,15 @@
   "pets": [
     {
       "id": 1,
-      "name": "Firulais",
-      "type": "Dog",
-      "ownerDni": 12324546
+      "name": "Gaspar",
+      "type": "Perro",
+      "ownerDni": 2134234
+    },
+    {
+      "id": 2,
+      "name": "Gaspar",
+      "type": "Perro",
+      "ownerDni": 2134234
     }
   ]
 }

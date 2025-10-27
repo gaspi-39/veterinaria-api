@@ -1,21 +1,21 @@
 import { IsString, IsEmail, Length, IsNumber, IsEmpty } from 'class-validator';
+import * as fs from 'fs';
 
-type petsDTO = { id: number; name: string; type: string; ownerDni: number };
 export class Pet {
-  id: number;
-  @IsString()
-  @Length(2, 10)
+  id?: number;
+  // @IsString()
+  // @Length(2, 10)
   name: string;
-  @IsString()
-  @Length(2, 10)
+  // @IsString()
+  // @Length(2, 10)
   type: string;
-  @IsNumber()
+  // @IsNumber()
   ownerDni: number;
 
-  constructor(data: petsDTO) {
-    this.id = data.id;
-    this.name = data.name;
-    this.ownerDni = data.ownerDni;
-    this.type = data.type;
+  constructor(name: string, ownerDni: number, type: string) {
+    this.id = Date.now();
+    this.name = name;
+    this.ownerDni = ownerDni;
+    this.type = type;
   }
 }

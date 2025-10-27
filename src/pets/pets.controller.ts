@@ -18,11 +18,13 @@ export class PetsController {
     return this.PetsService.getPets();
   }
   @Post()
-  postUser(@Body() body: Pet): any {
+  postUser(@Body() body: any): any {
+    // console.log('Body recibido:', body);
+    // return 'ok';
     return this.PetsService.createPet(body);
   }
   @Put()
-  putUser(@Body() body: Pet): any {
+  putUser(@Body() body: any): any {
     return this.PetsService.putPet(body);
   }
   @Delete(`/:id`)

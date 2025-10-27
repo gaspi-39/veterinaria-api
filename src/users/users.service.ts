@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from 'src/models/users.model';
 import * as fs from 'fs';
-import * as path from 'path';
 import { verifyDNI } from 'src/helpers/helpers';
 
 const ruta: string =

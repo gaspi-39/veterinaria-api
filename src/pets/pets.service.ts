@@ -1,9 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { User } from 'src/models/users.model';
 import * as fs from 'fs';
-import * as path from 'path';
 import { Pet } from 'src/models/pets.models';
-import { verifyId } from 'src/helpers/helpers';
 const ruta: string =
   'C:/Users/lazar/OneDrive/Documentos/TECDA/1er año/EDI/veterinaria-api/src/db/data.json';
 
@@ -30,17 +27,20 @@ export class PetsService {
   }
   createPet(pet: Pet): any {
     try {
+      // console.log('Pet recibido:', pet);
       const data = this.read();
-      const newPet: Pet = new Pet(pet);
-
-      if (verifyId(data, newPet.id)) {
-        throw new Error(`Esta ID ya está registrada`);
+      const checkDni = data.users.findIndex(
+        (user) => user.dni === pet.ownerDni,
+      );
+      if (checkDni != -1) {
+        const newPet: Pet = new Pet(pet.name, pet.ownerDni, pet.type);
+        data.pets.push(newPet);
+        this.write(data);
+        return { data: data.pets, msg: 'Mascota creada correctamente' };
       }
-
-      data.pets.push(newPet);
-      this.write(data);
-      return { data: data.pets, msg: 'Mascota creada correctamente' };
+      throw new Error(`DNI no registrado`);
     } catch (err) {
+      console.error('Error en createPet:', err);
       throw new NotFoundException(`Error: ${err}`);
     }
   }
@@ -48,7 +48,10 @@ export class PetsService {
     try {
       const data = this.read();
       const index = data.pets.findIndex((u) => u.id === pet.id);
-      let newPet: Pet = new Pet(pet);
+      let newPet: Pet = new Pet(pet.name, pet.ownerDni, pet.type);
+      newPet.id = pet.id;
+      console.log(newPet);
+
       if (index != -1) {
         data.pets.splice(index, 1, newPet);
         this.write(data);
