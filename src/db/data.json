@@ -7,22 +7,44 @@
     },
     {
       "dni": 55123123,
-      "name": "pepe",
+      "name": "Pepe",
       "lastName": "Perez"
     }
   ],
   "pets": [
     {
       "id": 1,
-      "name": "Gaspar",
+      "name": "Fiulais",
       "type": "Perro",
       "ownerDni": 2134234
     },
     {
       "id": 2,
-      "name": "Gaspar",
+      "name": "Roco",
       "type": "Perro",
       "ownerDni": 2134234
+    }
+  ],
+  "turnos": [
+    {
+      "id": 1,
+      "petId": 1,
+      "case": "Vacunacion",
+      "date": {
+        "dia": 1,
+        "mes": 1,
+        "año": 2025
+      }
+    },
+    {
+      "id": 1761603182480,
+      "petId": 1,
+      "case": "Revision",
+      "fecha": {
+        "dia": 27,
+        "mes": 10,
+        "anio": 2025
+      }
     }
   ]
 }
