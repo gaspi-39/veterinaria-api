@@ -1,21 +1,20 @@
 import { IsString, IsEmail, Length, IsNumber, IsEmpty } from 'class-validator';
 import * as fs from 'fs';
+type PetDTO = { name: string; ownerDni: number; type: string };
+// type History = {tratamientos: Tratamientos}
+// type Tratamientos = {nombre: string, duracion: number}
+// type Vacunas = {}
 
 export class Pet {
-  id?: number;
-  // @IsString()
-  // @Length(2, 10)
+  id: number;
   name: string;
-  // @IsString()
-  // @Length(2, 10)
   type: string;
-  // @IsNumber()
   ownerDni: number;
 
-  constructor(name: string, ownerDni: number, type: string) {
+  constructor(data: PetDTO) {
     this.id = Date.now();
-    this.name = name;
-    this.ownerDni = ownerDni;
-    this.type = type;
+    this.name = data.name;
+    this.ownerDni = data.ownerDni;
+    this.type = data.type;
   }
 }

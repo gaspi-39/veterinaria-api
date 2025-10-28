@@ -10,7 +10,12 @@ import { TurnosService } from './turnos/turnos.service';
 
 @Module({
   imports: [],
-  controllers: [AppController, UsersController, PetsController, TurnosController],
+  controllers: [
+    AppController,
+    UsersController,
+    PetsController,
+    TurnosController,
+  ],
   providers: [AppService, UsersService, PetsService, TurnosService],
 })
 export class AppModule {}

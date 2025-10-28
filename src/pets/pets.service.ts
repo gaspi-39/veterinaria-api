@@ -33,12 +33,12 @@ export class PetsService {
         (user) => user.dni === pet.ownerDni,
       );
       if (checkDni != -1) {
-        const newPet: Pet = new Pet(pet.name, pet.ownerDni, pet.type);
+        const newPet: Pet = new Pet(pet);
         data.pets.push(newPet);
         this.write(data);
         return { data: data.pets, msg: 'Mascota creada correctamente' };
       }
-      throw new Error(`DNI no registrado`);
+      throw new Error(`Verifique los campos ingresados e intente nuevamente`);
     } catch (err) {
       console.error('Error en createPet:', err);
       throw new NotFoundException(`Error: ${err}`);
@@ -47,17 +47,24 @@ export class PetsService {
   putPet(pet: Pet): any {
     try {
       const data = this.read();
+      const oldPet = data.pets.find((u) => u.id === pet.id);
       const index = data.pets.findIndex((u) => u.id === pet.id);
-      let newPet: Pet = new Pet(pet.name, pet.ownerDni, pet.type);
-      newPet.id = pet.id;
-      console.log(newPet);
 
-      if (index != -1) {
+      if (
+        index != -1 &&
+        typeof pet.name == 'string' &&
+        typeof pet.type == 'string'
+      ) {
+        let newPet: Pet = new Pet(pet);
+        newPet.id = pet.id;
+        newPet.ownerDni = oldPet.ownerDni;
+        console.log(newPet);
+
         data.pets.splice(index, 1, newPet);
         this.write(data);
         return { data: data.pets, msg: 'Mascota modificada correctamente' };
       }
-      throw new Error(`Mascota no encontrada`);
+      throw new Error(`Verifique los campos ingresados e intente nuevamente`);
     } catch (err) {
       throw new NotFoundException(`Error: ${err}`);
     }

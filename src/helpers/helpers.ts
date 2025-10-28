@@ -10,6 +10,10 @@ export function verifyId(data, id: number): boolean {
   const check: boolean = data.pets.some((pet) => pet.id === id);
   return check;
 }
+export function verifyTurnoId(data, id: number): boolean {
+  const check: boolean = data.turnos.some((pet) => pet.id === id);
+  return check;
+}
 export function getDate() {
   const fecha: any = new Date();
   const dia = fecha.getDate();

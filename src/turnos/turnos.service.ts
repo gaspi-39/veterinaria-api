@@ -1,6 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { error } from 'console';
 import * as fs from 'fs';
-import { getDate, validateDate, verifyId } from 'src/helpers/helpers';
+import {
+  getDate,
+  validateDate,
+  verifyId,
+  verifyTurnoId,
+} from 'src/helpers/helpers';
 import { Turno } from 'src/models/turno.models';
 const ruta =
   'C:/Users/lazar/OneDrive/Documentos/TECDA/1er año/EDI/veterinaria-api/src/db/data.json';
@@ -23,19 +29,36 @@ export class TurnosService {
     }
   }
   getTurno(): any {
-    const data = this.read();
-    return data.turnos;
+    try {
+      const data = this.read();
+      return data.turnos;
+    } catch (err) {
+      console.log(`Error: ${err}`);
+    }
   }
   createTurno(body: Turno): any {
-    const data = this.read();
-    const veridyDate = validateDate(body.fecha);
-    const verifyPetId = verifyId(data, body.petId);
-    if (veridyDate && verifyPetId) {
-      let turno = new Turno(body);
-      data.turnos.push(turno);
-      this.write(data);
-      return { data: data, msg: 'Turno creado exitosamente' };
+    try {
+      const data = this.read();
+      const veridyDate = validateDate(body.fecha);
+      const verifyPetId = verifyId(data, body.petId);
+      if (veridyDate && verifyPetId) {
+        let turno = new Turno(body);
+        data.turnos.push(turno);
+        this.write(data);
+        return { data: data, msg: 'Turno creado exitosamente' };
+      }
+      throw new NotFoundException('Datos no válidos');
+    } catch (err) {
+      console.log(`Error: ${err}`);
     }
-    throw new NotFoundException('Datos no válidos');
+  }
+  deleteTurno(id: number): any {
+    const data = this.read();
+    const check = verifyTurnoId(data, id);
+    if (check) {
+      const index = data.turnos.findIndex((t) => t.id === id);
+      data.turnos.splice(index, 1);
+    }
+    throw new NotFoundException('ID no válida');
   }
 }
