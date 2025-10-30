@@ -7,6 +7,8 @@ import { PetsService } from './pets/pets.service';
 import { PetsController } from './pets/pets.controller';
 import { TurnosController } from './turnos/turnos.controller';
 import { TurnosService } from './turnos/turnos.service';
+import { HistoryController } from './history/history.controller';
+import { HistoryService } from './history/history.service';
 
 @Module({
   imports: [],
@@ -15,7 +17,8 @@ import { TurnosService } from './turnos/turnos.service';
     UsersController,
     PetsController,
     TurnosController,
+    HistoryController,
   ],
-  providers: [AppService, UsersService, PetsService, TurnosService],
+  providers: [AppService, UsersService, PetsService, TurnosService, HistoryService],
 })
 export class AppModule {}

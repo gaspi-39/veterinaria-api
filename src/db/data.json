@@ -13,16 +13,47 @@
   ],
   "pets": [
     {
-      "id": 1,
-      "name": "Fiulais",
-      "type": "Perro",
-      "ownerDni": 2134234
+      "id": 1761670734279,
+      "name": "Cavani",
+      "type": "Dog",
+      "ownerDni": 47513088,
+      "history": {
+        "diagnosticos": [],
+        "vacunas": [
+          {
+            "nombre": "Antirrabica",
+            "fecha": {
+              "dia": 25,
+              "mes": 11,
+              "anio": 2025
+            }
+          }
+        ],
+        "tratamientos": []
+      }
     },
     {
-      "id": 2,
-      "name": "Roco",
-      "type": "Perro",
-      "ownerDni": 2134234
+      "id": 1761672360507,
+      "name": "Merentiel",
+      "type": "Dog",
+      "ownerDni": 55123123,
+      "history": {
+        "diagnosticos": [],
+        "vacunas": [],
+        "tratamientos": []
+      }
+    },
+    {
+      "id": 1761674112178,
+      "name": "Fabra",
+      "type": "Dog",
+      "ownerDni": 55123123,
+      "history": {
+        "diagnosticos": [],
+        "vacunas": [],
+        "tratamientos": []
+      },
+      "vaccinated": false
     }
   ],
   "turnos": [
