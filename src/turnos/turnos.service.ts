@@ -61,4 +61,23 @@ export class TurnosService {
     }
     throw new NotFoundException('ID no válida');
   }
+  getPetsSinTurno(): any {
+    const data = this.read();
+
+    if (!data.pets || data.pets.length === 0) {
+      return { msg: 'No hay mascotas registradas', pets: [] };
+    }
+
+    const petsConTurnoIds = (data.turnos || []).map((turno) => turno.petId);
+
+    const petsSinTurno = data.pets.filter(
+      (pet) => !petsConTurnoIds.includes(pet.id),
+    );
+
+    if (petsSinTurno.length === 0) {
+      return { msg: 'Todas las mascotas tienen turno agendado', pets: [] };
+    }
+
+    return { msg: 'Mascotas sin turno agendado', pets: petsSinTurno };
+  }
 }

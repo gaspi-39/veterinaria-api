@@ -21,10 +21,11 @@
         "diagnosticos": [],
         "vacunas": [
           {
+            "id": 1762179232056,
             "nombre": "Antirrabica",
             "fecha": {
               "dia": 25,
-              "mes": 11,
+              "mes": 12,
               "anio": 2025
             }
           }

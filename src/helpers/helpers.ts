@@ -22,14 +22,18 @@ export function getDate() {
   const anio = fecha.getFullYear();
   return { dia: dia, mes: mes, anio: anio };
 }
-export function validateDate(fecha: Fecha): boolean {
+export function validateDate(fecha: any): boolean {
   const fechaActual = getDate();
   let check: boolean = true;
-  if (fecha.anio < fechaActual.anio) check = true;
-
-  if (fecha.mes < fechaActual.mes) check = true;
-
-  if (fecha.dia < fechaActual.dia) check = true;
+  if (fecha.anio < fechaActual.anio) check = false;
+  if (fecha.mes < fechaActual.mes) check = false;
+  if (fecha.dia < fechaActual.dia) check = false;
+  if (
+    fecha.dia === undefined ||
+    fecha.mes === undefined ||
+    fecha.anio === undefined
+  )
+    check = false;
 
   return check;
 }
@@ -54,6 +58,7 @@ export function esDiagnostico(data: any): data is Diagnostico {
 }
 export function esTratamiento(data: any): data is Tratamiento {
   return (
-    typeof data.nombre === 'string' && typeof data.duracionDias === 'number'
+    typeof data.descripcion === 'string' &&
+    typeof data.duracionDias === 'number'
   );
 }

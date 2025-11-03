@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { HistoryService } from './history.service';
 
 @Controller('history')
@@ -14,6 +22,18 @@ export class HistoryController {
   }
   @Post('/:id')
   postHistory(@Param('id') id: string, @Body() body: any): any {
-    return this.HistoryService.updateHistory(body, Number(id));
+    return this.HistoryService.createHistory(body, Number(id));
+  }
+  @Delete('/:id/:campo/:idCampo')
+  putHistory(
+    @Param('id') id: string,
+    @Param('campo') campo: string,
+    @Param('idCampo') idCampo: string,
+  ) {
+    return this.HistoryService.deleteHistory(
+      Number(id),
+      campo,
+      Number(idCampo),
+    );
   }
 }
